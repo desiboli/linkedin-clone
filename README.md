@@ -45,4 +45,4 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 # linkedin-clone
 
-https://youtu.be/tbvguOj8C-o?t=3030
+https://youtu.be/tbvguOj8C-o?t=5306
