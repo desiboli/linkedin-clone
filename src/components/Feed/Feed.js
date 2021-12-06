@@ -17,12 +17,16 @@ import {
   setDoc,
   serverTimestamp,
 } from "firebase/firestore";
+import { useSelector } from "react-redux";
+import { selectUser } from "../../features/userSlice";
 
 function Feed() {
+  const user = useSelector(selectUser);
   const [input, setInput] = useState("");
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
+    // Firebase V8
     /*     db.collection('posts').onSnapshot((snapshot) =>
       setPosts(
         snapshot.docs.map((doc) => ({
@@ -32,6 +36,7 @@ function Feed() {
       )
     ) */
 
+    // Firebase V9
     const q = query(collection(db, "posts"), orderBy("timestamp", "desc"));
     onSnapshot(q, (snapshot) => {
       setPosts(
@@ -46,6 +51,7 @@ function Feed() {
   const sendPost = async (e) => {
     e.preventDefault(); // Stopping the default behaviour which is reloading the page.
 
+    // Firebase V8
     /*     db.collection('posts').add({
       name: 'Mustafa Alshammaa',
       description: 'This is a test',
@@ -55,11 +61,12 @@ function Feed() {
       timestamp: firebase.firestore.FieldValue.serverTimestamp
     }) */
 
+    // Firebase V9
     const docData = {
-      name: "Mustafa Alshammaa",
-      description: "This is a test",
+      name: user.displayName,
+      description: user.email,
       message: input,
-      photoUrl: "",
+      photoUrl: user.photoUrl || "",
       timestamp: serverTimestamp(),
     };
 
