@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Feed.css";
+import FlipMove from "react-flip-move";
 import Post from "../Post/Post";
 import CreateIcon from "@mui/icons-material/Create";
 import ImageIcon from "@mui/icons-material/Image";
@@ -105,15 +106,17 @@ function Feed() {
         </div>
       </div>
 
-      {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
-        <Post
-          key={id}
-          name={name}
-          description={description}
-          message={message}
-          photoUrl={photoUrl}
-        />
-      ))}
+      <FlipMove>
+        {posts.map(({ id, data: { name, description, message, photoUrl } }) => (
+          <Post
+            key={id}
+            name={name}
+            description={description}
+            message={message}
+            photoUrl={photoUrl}
+          />
+        ))}
+      </FlipMove>
       {/*<Post name="Adam Alshammaa" description="This is a test" message="WOW this worked" />*/}
     </div>
   );
